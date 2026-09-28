@@ -96,8 +96,8 @@ export function ProjectsPage() {
 
   const navigate = useNavigate();
 
-  const searchProject = projectList.filter((project) => // тут всі проекти
-    project.name.toLowerCase().includes(projectSearch.toLowerCase().trim()) // тут список змінються, коли користувач використовує вікно пошуку
+  const fiteredProjects = projectList.filter((project) => 
+    project.name.toLowerCase().includes(projectSearch.toLowerCase().trim()) 
     );
   return (
     <div className="flex w-full flex-col">
@@ -131,8 +131,8 @@ export function ProjectsPage() {
       </div>
 
       <div className="grid grid-cols-3 gap-6 pt-12">
-        {searchProject.length > 0 ? ( 
-          searchProject.map((p) => {
+        {fiteredProjects.length > 0 ? ( 
+          fiteredProjects.map((p) => {
             const projectTasks = tasks.filter(
               (task) => task.projectId === p.id,
             );
