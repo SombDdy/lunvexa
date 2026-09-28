@@ -6,6 +6,12 @@ export type CreateUserData = {
     avatarUrl?: string;
  }
 
+ export type UpdateUserData = {
+    name?: string;
+    email?: string;
+    avatarUrl?: string;
+ }
+
 export const getAllUsers = () => {
     return users;
 }
@@ -28,4 +34,31 @@ export const createUser = (data: CreateUserData) => {
 
     users.push(newUser);
     return newUser;
+}
+
+export const updateUser = (id: number, data: UpdateUserData) => {
+    const updatingUser = getUserById(id);
+    if(!updatingUser){
+        return;
+    };
+    if(data.name !== undefined){
+        updatingUser.name = data.name;
+    };
+    if(data.email !== undefined){
+        updatingUser.email = data.email;
+    };
+    if(data.avatarUrl !== undefined){
+        updatingUser.avatarUrl = data.avatarUrl;
+    }
+    return updatingUser;
+}
+
+export const deleteUser = (id: number) => {
+    const deletingUser = getUserById(id);
+    if(!deletingUser){
+        return;
+    };
+    const userIndex = users.findIndex((user) => user.id === id);
+    const deletedUser = users.splice(userIndex, 1);
+    return deletedUser[0];
 }
